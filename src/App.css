@@ -12,7 +12,7 @@ body{
   font-family: monospace;
   font-size: 3em;
 }
-.instructions, .cardNumber {
+.header {
   padding: 5px;
   font-family: 'Times New Roman', Times, serif;
   color: #666;
@@ -60,8 +60,8 @@ body{
 button{
   background-color:#666;
   color: white;
-  font-size: 2em;
-  padding: 10px 20px;
+  font-size: 1.75em;
+  padding: 5px 10px;
   margin: 10px;
   border-style: solid;
   border-width: 1px;
@@ -74,4 +74,8 @@ button{
 button:hover {
   background-color: papayawhip;
   color: black;
+}
+.notUse {
+  background-color: rgb(250, 250, 250);
+  color: rgb(179, 176, 176);
 }

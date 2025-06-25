@@ -2,50 +2,31 @@ import React from 'react'
 import './App.css'
 import { flashcards } from './data.js';
 import { useState } from 'react';
+import Learning from './modes/Learning.jsx';
+import Testing from './modes/Testing.jsx';
 
 function App() {
-  const [count, setCount] = useState(1)
-  const [side, setSide] = useState('type')
-  const totalCards = flashcards.length;
-  const cardIndex = count - 1;
-  const currentFlashcard = flashcards[cardIndex];
-  
-  const nextFlashcard = () => {
-    setCount(count === totalCards ? 1 : count + 1);
-    setSide('type');
-  }
-  const lastFlashcard = () => {
-    setCount(count === 1 ? totalCards : count - 1);
-    setSide('type');
-  }
-  const switchSide = () => {
-    setSide(side === 'type' ? 'image' : 'type');
-  }
+  const [mode, setMode] = useState('home'); // 'home', 'learning', or 'testing'
 
   return (
     <div className='App'>
-      <div className='header'>
-        <div className='title'>Types of cats</div>
-        <div className='instructions'>
-          Click the card to filp it. Click the arrouws to move between the cards.
+      <div className='title'>Types of cats</div>
+  
+      {mode === 'home' && (
+        <div className='buttons'>
+          <button onClick={() => setMode('learning')}>Learning Mode</button>
+          <button onClick={() => setMode('testing')}>Testing Mode</button>
         </div>
-        <div className='cardNumber'>Card: {count}/{totalCards}</div>
-      </div>
-      <div className='flashCard' onClick={switchSide}>
-        {side === 'type' ? (
-          <div className='flashCard-type'>{currentFlashcard.type}</div>
-        ) : (
-          <div className='flashCard-image'>
-            <img className='catImage' src={currentFlashcard.image} alt={currentFlashcard.type} />
-          </div>
-        )}
-      </div>
-      <div className='buttons'>
-        <button onClick={lastFlashcard}> &larr; </button>
-        <button onClick={nextFlashcard}> &rarr; </button>
-      </div>
+      )}
+
+      {mode === 'learning' && (
+        <Learning flashcards={flashcards} setMode={setMode} />
+      )}
+
+      {mode === 'testing' && (
+        <Testing flashcards={flashcards} setMode={setMode} />
+      )}
     </div>
   )
 }
-
 export default App
